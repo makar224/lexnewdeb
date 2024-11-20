@@ -1,0 +1,66 @@
+#!/bin/bash
+
+set -e # fail on any error
+
+# Подключение команд debconf
+. /usr/share/debconf/confmodule
+
+set -u # treat unset variables as errors
+
+# ======[ Trap Errors ]======#
+set -E # let shell functions inherit ERR trap
+
+# Trap non-normal exit signals:
+# 1/HUP, 2/INT, 3/QUIT, 15/TERM, ERR
+trap err_handler 1 2 3 15 ERR
+function err_handler {
+local exit_status=${1:-$?}
+logger -s -p "syslog.err" -t "lexnew.deb" "lexnew.deb script '$0' error code $exit_status (line $BASH_LINENO: '$BASH_COMMAND')"
+exit $exit_status
+}
+
+echo "CONFIG-script"
+
+#case "$1" in
+#configure|reconfigure)
+## Запрос
+#db_input medium "supersh/greeting" || true # инициализация
+#db_go || true # вывод запроса на экран
+## Обработка ответа
+#db_get "supersh/greeting" # Получение значения в переменную $RET
+#greeting="$RET" 
+#echo "$greeting" > /etc/supersh/greeting.txt
+#;;
+#*)
+#echo "config called with unknown argument \`$1'" >&2
+#exit 1
+#;;
+#esac
+
+#echo "initial PATH=$PATH"
+#echo "export PATH=\"\$PATH:/opt/lexnew\"" > /etc/profile.d/lexnew_profile.sh || true
+#. /etc/profile.d/lexnew_profile.sh # - not working!
+#export PATH="$PATH:/opt/lexnew" # - not working!
+#chmod 0644 /etc/profile.d/lexnew_profile.sh
+
+CURUSER=`who | grep ":0" | head -n 1 | awk '{print($1)}'`
+if [ -z "$CURUSER" ]; then
+	echo "Couldn't accept current user name"
+	exit 1
+fi
+#echo "CURUSER=$CURUSER"
+if [ ! -L /home/"$CURUSER"/Desktop/LexNew ]; then
+	echo "! -e link"
+	# Запрос
+	db_input critical "lexnew/desktopicon" || true # инициализация
+	db_go || true # вывод запроса на экран
+	# Обработка ответа
+	db_get "lexnew/desktopicon" # Получение значения в переменную $RET
+
+	if [ $RET = true ]; then
+		#echo "ret = true"
+		ln -s /usr/share/applications/lexnew.desktop /home/"$CURUSER"/Desktop/LexNew &>/dev/null
+	fi
+fi
+
+echo "exit CONFIG-script"

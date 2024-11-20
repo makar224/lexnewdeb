@@ -1,0 +1,5 @@
+Template: lexnew/desktopicon
+Type: boolean
+Description: Wether to install a desktop link?
+ Installation of a link with the icon to the desktop
+Default: true
