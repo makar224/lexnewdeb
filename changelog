@@ -1,6 +1,16 @@
+lexnew (1.4-1) unstable; urgency=medium
+
+  * Add Exit-button on the main window
+  * Add status bar on the translation dialog;
+  * Add saving translation direction setting;
+  * The status bar wasn't updated when the translation dialog
+  appeared under the main window;
+
+ -- Artem Makavchik <a.makavchik1@gmail.com>  Wed, 20 Nov 2024 12:53:19 +0300  
+
 lexnew (1.3-1) unstable; urgency=medium
 
-  * Added translation direction setting (RadioBox)
+  * Add translation direction setting (RadioBox)
 
  -- Artem Makavchik <a.makavchik1@gmail.com>  Tue, 29 Oct 2024 16:01:04 +0300  
 

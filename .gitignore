@@ -9,3 +9,4 @@ lexnew.deb
 lexnew.desktop
 lib
 qt.conf_rename
+lexnew/usr/share/doc/lexnew/changelog.Debian.gz

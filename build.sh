@@ -1,10 +1,11 @@
 #!/bin/bash
 
-mkdir -p lexnew/opt/lexnew
+#mkdir -p lexnew/opt/lexnew
 cp LexNew lexnew/opt/lexnew
 chrpath -d lexnew/opt/lexnew/LexNew
 objcopy --strip-debug --strip-unneeded lexnew/opt/lexnew/LexNew
-chmod -R 0755 lexnew/opt
+#chmod -R 0755 lexnew/opt
+chmod 0755 lexnew/opt/lexnew/LexNew
 
 ##mkdir -p lexnew/usr/lib/qt/plugins/platforms
 ##cp lib/libqxcb.so lexnew/usr/lib/qt/plugins/platforms
