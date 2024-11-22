@@ -1,0 +1,13 @@
+Package: lexnew
+Version: 1.4-1
+Section: text
+Priority: optional
+Depends: libqt6widgets6t64, libqt6gui6t64, libqt6core6t64, libicu74, libstdc++6, libgcc-s1, libc6, debconf
+Architecture: amd64
+#Essential: no
+Installed-Size: 188
+Maintainer: makar <a.makavchik1@gmail.com>
+Description: Expressions memorizing application
+ An application for learning to memorize
+ expression pairs with a special methodics
+
